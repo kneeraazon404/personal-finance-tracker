@@ -6,6 +6,16 @@ import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
 import { accountSchema, AccountInput } from "@/lib/validations";
 
+type AccountBalanceRow = {
+    id: string;
+    name: string;
+    initialAmount: number | string;
+    currentBalance: number | string;
+    date: Date;
+    userId: string;
+    [key: string]: unknown;
+};
+
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
     if (!session?.user?.id) {
@@ -36,13 +46,13 @@ export async function getAccounts() {
     const userId = await getCurrentUserId();
 
     // Use raw query to get computed balances from view
-    const accounts = await prisma.$queryRaw<any[]>`
+    const accounts = await prisma.$queryRaw<AccountBalanceRow[]>`
     SELECT * FROM account_balances 
     WHERE "userId" = ${userId}
     ORDER BY name ASC
   `;
 
-    return accounts.map((account) => ({
+    return accounts.map((account: AccountBalanceRow) => ({
         ...account,
         initialAmount: Number(account.initialAmount),
         currentBalance: Number(account.currentBalance),
