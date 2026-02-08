@@ -5,37 +5,42 @@ import GithubProvider from "next-auth/providers/github";
 import { prisma } from "@/lib/db";
 
 export const authOptions: NextAuthOptions = {
-    debug: process.env.NODE_ENV !== "production",
-    adapter: PrismaAdapter(prisma),
-    providers: [
-        GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-        }),
-        GithubProvider({
-            clientId: process.env.GITHUB_ID!,
-            clientSecret: process.env.GITHUB_SECRET!,
-        }),
-    ],
-    session: {
-        strategy: "jwt",
+  debug: process.env.NODE_ENV !== "production",
+  adapter: PrismaAdapter(prisma),
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+    GithubProvider({
+      clientId: process.env.GITHUB_ID!,
+      clientSecret: process.env.GITHUB_SECRET!,
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+        console.log("JWT Callback - User logged in:", user.id);
+        if (account) {
+          console.log("JWT Callback - Account provider:", account.provider);
+        }
+      }
+      return token;
     },
-    callbacks: {
-        jwt: async ({ token, user }) => {
-            if (user) {
-                token.id = user.id;
-            }
-            return token;
-        },
-        session: async ({ session, token }) => {
-            if (session.user) {
-                session.user.id = token.id as string;
-            }
-            return session;
-        },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+      }
+      return session;
     },
-    pages: {
-        signIn: "/login",
-        error: "/login",
-    },
+  },
+  pages: {
+    signIn: "/login",
+    error: "/login",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };

@@ -65,7 +65,7 @@ export function Hero() {
             </Button>
           </Link>
           <Link
-            href="https://github.com/kneeraazon/personal-finance-tracker"
+            href="https://github.com/kneeraazon404/personal-finance-tracker"
             target="_blank"
           >
             <Button
