@@ -52,7 +52,7 @@ A modern, full-stack personal finance management application built with Next.js 
 
 ### 📉 Analytics & Insights
 
-- Interactive charts and graphs (powered by Recharts)
+- Interactive charts and graphs (powered by Chart.js)
 - Spending trends analysis
 - Category breakdowns
 - Net worth tracking
@@ -77,7 +77,7 @@ A modern, full-stack personal finance management application built with Next.js 
 - **Animations**: Framer Motion
 - **Forms**: React Hook Form + Zod validation
 - **Icons**: Lucide React
-- **Charts**: Recharts
+- **Charts**: Chart.js + react-chartjs-2
 - **State Management**: TanStack Query (React Query)
 
 ### Backend

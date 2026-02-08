@@ -96,7 +96,7 @@ export default function PrivacyPage() {
           privacy practices of these third parties.
         </p>
 
-        <h2>9. Children's Privacy</h2>
+        <h2>9. Children&apos;s Privacy</h2>
         <p>
           Our Service is not directed to children under 13. We do not knowingly
           collect personal information from children under 13.
@@ -113,8 +113,8 @@ export default function PrivacyPage() {
         <p>
           If you have any questions about this Privacy Policy, please contact us
           at{" "}
-          <a href="mailto:privacy@financetracker.com">
-            privacy@financetracker.com
+          <a href="mailto:privacy@finance-tracker.com">
+            privacy@finance-tracker.com
           </a>
         </p>
       </div>

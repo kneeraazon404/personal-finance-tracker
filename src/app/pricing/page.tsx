@@ -14,7 +14,7 @@ export default function PricingPage() {
   const plans = [
     {
       name: "Free",
-      price: "$0",
+      price: "Rs. 0",
       period: "forever",
       description: "Perfect for getting started with personal finance",
       features: [
@@ -35,7 +35,7 @@ export default function PricingPage() {
     },
     {
       name: "Pro",
-      price: "$9",
+      price: "Rs. 999",
       period: "per month",
       description: "For serious budgeters and savers",
       features: [
@@ -218,7 +218,7 @@ export default function PricingPage() {
                   Do you offer refunds?
                 </h3>
                 <p className="text-muted-foreground">
-                  We offer a 30-day money-back guarantee. If you're not
+                  We offer a 30-day money-back guarantee. If you&apos;re not
                   satisfied, contact us for a full refund.
                 </p>
               </div>
@@ -233,7 +233,7 @@ export default function PricingPage() {
               Still Have Questions?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Our team is here to help. Reach out and we'll get back to you
+              Our team is here to help. Reach out and we&apos;ll get back to you
               within 24 hours.
             </p>
             <Link href="mailto:support@financetracker.com">

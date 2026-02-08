@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import {
   BarChart3,
   Lock,
-  Wallet,
-  ArrowUpRight,
   PieChart,
   CreditCard,
+  ArrowUpRight,
 } from "lucide-react";
 
 const features = [
@@ -19,14 +18,7 @@ const features = [
     color: "text-blue-500",
     bg: "bg-blue-500/10",
   },
-  {
-    icon: Wallet,
-    title: "Account Management",
-    description:
-      "Connect all your bank accounts, credit cards, and investments in one secure place with real-time updates.",
-    color: "text-green-500",
-    bg: "bg-green-500/10",
-  },
+
   {
     icon: Lock,
     title: "Bank-Grade Security",
@@ -58,6 +50,14 @@ const features = [
       "Identify recurring charges and cancel unwanted subscriptions with a single click.",
     color: "text-cyan-500",
     bg: "bg-cyan-500/10",
+  },
+  {
+    icon: PieChart,
+    title: "Advance Charts",
+    description:
+      "Visualize your financial health with interactive Radar and Stacked Line charts powered by Chart.js.",
+    color: "text-indigo-500",
+    bg: "bg-indigo-500/10",
   },
 ];
 

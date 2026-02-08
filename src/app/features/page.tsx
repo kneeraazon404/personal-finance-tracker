@@ -121,9 +121,9 @@ export default function FeaturesPage() {
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-3xl md:text-5xl font-semibold tracking-tight mb-6">
               Powerful Features for{" "}
-              <span className="text-[var(--crimson)] drop-shadow-lg">
-                Complete Control
-              </span>
+              <span className="text-crimson">Privacy</span> & Security
+              <br />
+              Complete Control
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Everything you need to master your finances, all in one beautiful
@@ -199,6 +199,9 @@ export default function FeaturesPage() {
         {/* CTA Section */}
         <section className="py-20 px-6">
           <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold text-center mb-12 text-crimson">
+              Everything you need to manage your money
+            </h2>
             <h2 className="text-3xl font-semibold mb-6">
               Ready to Get Started?
             </h2>

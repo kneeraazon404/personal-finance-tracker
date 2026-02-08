@@ -91,7 +91,7 @@ export function Hero() {
             <p className="text-sm text-muted-foreground">Active Users</p>
           </div>
           <div className="flex flex-col items-center">
-            <h4 className="text-3xl font-semibold text-foreground">$2M+</h4>
+            <h4 className="text-3xl font-semibold text-foreground">Rs. 2M+</h4>
             <p className="text-sm text-muted-foreground">Tracked Assets</p>
           </div>
           <div className="flex flex-col items-center">

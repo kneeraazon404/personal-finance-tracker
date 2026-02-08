@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Shield, TrendingUp, Users, Zap } from "lucide-react";
+import { Icons } from "@/components/shared/icons";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer as LandingFooter } from "@/components/landing/footer";
@@ -30,9 +31,9 @@ export default function AboutPage() {
               <span className="text-crimson drop-shadow-lg">Our Mission</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              We believe everyone deserves to master their money. Our platform
-              empowers you with the tools and insights to take control of your
-              financial future.
+              Our mission is to empower individuals to take control of their
+              financial future through intuitive, powerful, and secure tools. We
+              believe financial freedom starts with clarity.
             </p>
           </div>
         </section>
@@ -45,16 +46,18 @@ export default function AboutPage() {
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed mb-6">
               Budget Tracker was built with a simple goal: make financial
-              management accessible, intuitive, and powerful for everyone. We
-              know that tracking expenses and managing budgets can feel
-              overwhelming, which is why we've created a platform that
-              simplifies the process while providing deep insights into your
-              financial health.
+              management accessible, intuitive, and powerful for everyone.
+              We&apos;re a team of finance enthusiasts and developers who
+              believe that managing money shouldn&apos;t be complicated. We
+              built the tool we wanted to use ourselves. We know that tracking
+              expenses and managing budgets can feel overwhelming, which is why
+              we&apos;ve created a platform that simplifies the process while
+              providing deep insights into your financial health.
             </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Whether you're saving for a home, paying off debt, or building
-              your investment portfolio, we provide the tools you need to
-              succeed—all in one place.
+              Whether you&apos;re saving for a home, paying off debt, or
+              building your investment portfolio, we provide the tools you need
+              to succeed—all in one place.
             </p>
           </div>
         </section>
@@ -124,20 +127,49 @@ export default function AboutPage() {
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                "Next.js",
-                "PostgreSQL",
-                "Prisma",
-                "NextAuth",
-                "TypeScript",
-                "TailwindCSS",
-                "React",
-                "Supabase",
+                {
+                  name: "Next.js",
+                  icon: Icons.nextjs,
+                  color: "text-neutral-900 dark:text-white",
+                },
+                {
+                  name: "PostgreSQL",
+                  icon: Icons.postgres,
+                  color: "text-blue-500",
+                },
+                {
+                  name: "Prisma",
+                  icon: Icons.prisma,
+                  color: "text-emerald-500",
+                },
+                { name: "NextAuth", icon: Shield, color: "text-purple-500" },
+                {
+                  name: "TypeScript",
+                  icon: Icons.typescript,
+                  color: "text-blue-600",
+                },
+                {
+                  name: "TailwindCSS",
+                  icon: Icons.tailwind,
+                  color: "text-cyan-500",
+                },
+                { name: "React", icon: Icons.react, color: "text-blue-400" },
+                {
+                  name: "Supabase",
+                  icon: Icons.supabase,
+                  color: "text-emerald-400",
+                },
               ].map((tech) => (
                 <div
-                  key={tech}
-                  className="p-6 rounded-xl bg-card border border-border text-center font-semibold shadow-lg hover:shadow-xl transition-shadow"
+                  key={tech.name}
+                  className="p-6 rounded-xl bg-card border border-border text-center font-semibold shadow-lg hover:shadow-xl transition-all group"
                 >
-                  {tech}
+                  <div className="flex justify-center mb-4">
+                    <tech.icon
+                      className={`w-8 h-8 ${tech.color} group-hover:scale-110 transition-transform`}
+                    />
+                  </div>
+                  {tech.name}
                 </div>
               ))}
             </div>
