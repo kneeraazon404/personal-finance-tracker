@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
-import { Prisma } from "@prisma/client";
 import { budgetSchema, BudgetInput } from "@/lib/validations";
 import type { BudgetWithProgress } from "@/types/finance";
 
@@ -14,7 +13,7 @@ async function getCurrentUserId() {
   return session.user.id;
 }
 
-type Decimalish = Prisma.Decimal | number | string;
+type Decimalish = number | string | { toString(): string };
 
 type BudgetWithCategory = {
   id: string;

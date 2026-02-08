@@ -5,10 +5,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
 import { accountSchema, AccountInput } from "@/lib/validations";
-import { Prisma } from "@prisma/client";
 import type { AccountBalance } from "@/types/finance";
 
-type Decimalish = Prisma.Decimal | number | string;
+type Decimalish = number | string | { toString(): string };
 
 type AccountBalanceRow = Omit<
   AccountBalance,

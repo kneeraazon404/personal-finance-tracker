@@ -6,9 +6,8 @@ import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
 import { goalSchema, GoalInput } from "@/lib/validations";
 import type { GoalProgress } from "@/types/finance";
-import { Prisma } from "@prisma/client";
 
-type Decimalish = Prisma.Decimal | number | string;
+type Decimalish = number | string | { toString(): string };
 
 type GoalProgressRow = Omit<
   GoalProgress,
