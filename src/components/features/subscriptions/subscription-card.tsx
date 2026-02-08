@@ -48,7 +48,7 @@ export function SubscriptionCard({ subscription, onEdit, onDelete }: Subscriptio
                 )}
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold">
+                <div className="text-2xl font-semibold">
                     {formatCurrency(subscription.cost)}
                     <span className="text-sm font-normal text-muted-foreground">
                         /{subscription.billing.toLowerCase()}

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Personal Finance Tracker",
+  title: "Budget Tracker",
   description:
     "Master your money with confidence. Track expenses, manage accounts, and reach your goals.",
 };

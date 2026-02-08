@@ -37,6 +37,10 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-crimson: var(--crimson);
+  --color-crimson-light: var(--crimson-light);
+  --color-wine: var(--wine);
+  --color-ruby: var(--ruby);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -79,6 +83,12 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.488 0.243 264.376);
+
+  /* Dark Red Accent Colors */
+  --crimson: oklch(0.45 0.22 15); /* Deep crimson */
+  --crimson-light: oklch(0.55 0.2 15); /* Lighter crimson */
+  --wine: oklch(0.35 0.15 10); /* Dark wine */
+  --ruby: oklch(0.5 0.25 20); /* Vibrant ruby */
 }
 
 .dark {
@@ -113,6 +123,12 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(0.25 0.05 260);
   --sidebar-ring: oklch(0.65 0.22 265);
+
+  /* Dark Red Accent Colors for Dark Mode */
+  --crimson: oklch(0.6 0.24 15); /* Brighter crimson for dark mode */
+  --crimson-light: oklch(0.7 0.22 15); /* Lighter crimson for dark mode */
+  --wine: oklch(0.5 0.18 10); /* Lighter wine for dark mode */
+  --ruby: oklch(0.65 0.26 20); /* Brighter ruby for dark mode */
 }
 
 @layer base {

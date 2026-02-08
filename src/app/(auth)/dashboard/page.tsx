@@ -35,7 +35,7 @@ export default async function DashboardPage() {
     return (
         <div className="flex-1 space-y-6 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Dashboard</h2>
             </div>
 
             {/* Top Summary Cards */}
@@ -46,7 +46,7 @@ export default async function DashboardPage() {
                         <Wallet className="h-4 w-4 text-muted-foreground" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold">{formatCurrency(totalBalance)}</div>
+                        <div className="text-2xl font-semibold">{formatCurrency(totalBalance)}</div>
                         <p className="text-xs text-muted-foreground">Across {accounts.length} accounts</p>
                     </CardContent>
                 </Card>
@@ -56,7 +56,7 @@ export default async function DashboardPage() {
                         <Banknote className="h-4 w-4 text-red-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-red-600 dark:text-red-400">
+                        <div className="text-2xl font-semibold text-red-600 dark:text-red-400">
                             {formatCurrency(totalDebt)}
                         </div>
                         <p className="text-xs text-muted-foreground">Total payable loans</p>
@@ -68,7 +68,7 @@ export default async function DashboardPage() {
                         <CreditCard className="h-4 w-4 text-blue-500" />
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                        <div className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
                             {formatCurrency(monthlySubscriptions)}
                         </div>
                         <p className="text-xs text-muted-foreground">{subscriptions.length} active services</p>
@@ -81,7 +81,7 @@ export default async function DashboardPage() {
                     </CardHeader>
                     <CardContent>
                         {/* Placeholder for elaborate income/expense calc */}
-                        <div className="text-2xl font-bold">--</div>
+                        <div className="text-2xl font-semibold">--</div>
                         <p className="text-xs text-muted-foreground">Cash flow tracking coming soon</p>
                     </CardContent>
                 </Card>
@@ -147,7 +147,7 @@ export default async function DashboardPage() {
                             <Wallet className="h-4 w-4 text-muted-foreground" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-xl font-bold">{formatCurrency(acc.currentBalance)}</div>
+                            <div className="text-xl font-semibold">{formatCurrency(acc.currentBalance)}</div>
                         </CardContent>
                     </Card>
                 ))}

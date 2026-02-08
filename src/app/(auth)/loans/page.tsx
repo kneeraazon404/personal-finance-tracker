@@ -24,7 +24,7 @@ export default async function LoansPage() {
     return (
         <div className="flex-1 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Loans & Debts</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Loans & Debts</h2>
                 <LoanCreateDialog />
             </div>
 
@@ -36,7 +36,7 @@ export default async function LoansPage() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-red-700 dark:text-red-300">
+                        <div className="text-2xl font-semibold text-red-700 dark:text-red-300">
                             {formatCurrency(totalPayable)}
                         </div>
                     </CardContent>
@@ -48,7 +48,7 @@ export default async function LoansPage() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="text-2xl font-bold text-green-700 dark:text-green-300">
+                        <div className="text-2xl font-semibold text-green-700 dark:text-green-300">
                             {formatCurrency(totalReceivable)}
                         </div>
                     </CardContent>

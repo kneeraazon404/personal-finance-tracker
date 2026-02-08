@@ -14,7 +14,7 @@ export default async function CategoriesPage() {
     return (
         <div className="flex-1 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Categories</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Categories</h2>
                 <CategoryCreateDialog />
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

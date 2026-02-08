@@ -1,95 +1,326 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💰 Personal Finance Tracker
 
-## Getting Started
+A modern, full-stack personal finance management application built with Next.js 16, featuring real-time transaction tracking, budget management, goal setting, and comprehensive financial analytics.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16.1-black?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?logo=typescript)
+![Prisma](https://img.shields.io/badge/Prisma-7.2-2D3748?logo=prisma)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+## ✨ Features
+
+### 💳 Account Management
+
+- Connect multiple bank accounts and credit cards
+- Track balances in real-time
+- Support for various account types (checking, savings, credit, investment)
+
+### 📊 Transaction Tracking
+
+- Automated transaction categorization
+- Merchant recognition and tagging
+- Advanced filtering and search
+- Transaction history with pagination
+
+### 📈 Budget Planning
+
+- Create custom budgets by category
+- Visual progress tracking
+- Budget alerts and notifications
+- Month-over-month comparison
+
+### 🎯 Financial Goals
+
+- Set and track savings goals
+- Progress visualization
+- Target date tracking
+- Achievement milestones
+
+### 💸 Loan Management
+
+- Track multiple loans (mortgages, auto, personal)
+- Calculate payment schedules
+- Monitor interest and principal breakdowns
+- Payoff projections
+
+### 🔄 Subscription Tracking
+
+- Identify recurring charges
+- Manage active subscriptions
+- Cost analysis and optimization
+- Cancellation reminders
+
+### 📉 Analytics & Insights
+
+- Interactive charts and graphs (powered by Recharts)
+- Spending trends analysis
+- Category breakdowns
+- Net worth tracking
+- Custom date range reporting
+
+### 🔐 Security & Authentication
+
+- Secure OAuth 2.0 authentication (GitHub, Google)
+- NextAuth.js integration
+- Bank-grade encryption
+- Session management
+- Protected API routes
+
+## 🚀 Tech Stack
+
+### Frontend
+
+- **Framework**: Next.js 16 with App Router
+- **Language**: TypeScript 5
+- **Styling**: Tailwind CSS 4
+- **UI Components**: Radix UI + shadcn/ui
+- **Animations**: Framer Motion
+- **Forms**: React Hook Form + Zod validation
+- **Icons**: Lucide React
+- **Charts**: Recharts
+- **State Management**: TanStack Query (React Query)
+
+### Backend
+
+- **API**: Next.js API Routes
+- **Database**: PostgreSQL
+- **ORM**: Prisma 7
+- **Authentication**: NextAuth.js 4
+- **Adapter**: Prisma Adapter for NextAuth
+
+### DevOps & Tools
+
+- **Hosting**: Vercel (recommended)
+- **Database**: Supabase / Neon / Railway
+- **Version Control**: Git
+- **Package Manager**: npm
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** 20.x or higher
+- **npm** or **yarn** or **pnpm**
+- **PostgreSQL** database (local or cloud)
+- **Git**
+
+## 🛠️ Installation & Setup
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/kneeraazon404/personal-finance-tracker.git
+cd personal-finance-tracker
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Environment Configuration
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Configuration
-
-To run this project, you need to set up several environment variables. Copy the `.env.example` file to `.env`:
+Copy the example environment file and configure your variables:
 
 ```bash
 cp .env.example .env
 ```
 
-Then open `.env` and update the following values:
+Edit `.env` with your credentials:
 
-### 1. Database (Prisma + PostgreSQL)
+#### Database Configuration
 
-You need a PostgreSQL database.
+Get a PostgreSQL connection string from:
 
-**Local Development:**
+- **Local**: `postgresql://username:password@localhost:5432/database`
+- **Supabase**: [supabase.com](https://supabase.com)
+- **Neon**: [neon.tech](https://neon.tech)
+- **Railway**: [railway.app](https://railway.app)
 
-- Install PostgreSQL locally.
-- Create a database (e.g., `finance_tracker`).
-- Connection string: `postgresql://user:password@localhost:5432/finance_tracker`
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/DATABASE"
+```
 
-**Cloud Providers (Recommended for Production):**
+#### NextAuth Configuration
 
-- [Neon](https://neon.tech/)
-- [Supabase](https://supabase.com/)
-- [Railway](https://railway.app/)
+Generate a secret:
 
-Update `DATABASE_URL` in `.env` with your connection string.
+```bash
+openssl rand -base64 32
+```
 
-### 2. NextAuth Configuration
+```env
+NEXTAUTH_SECRET="your-generated-secret"
+NEXTAUTH_URL="http://localhost:3000"
+```
 
-- **NEXTAUTH_SECRET**: Used to encrypt sessions. Generate one using:
-  ```bash
-  openssl rand -base64 32
-  ```
-- **NEXTAUTH_URL**: The canonical URL of your site.
-  - Development: `http://localhost:3000`
-  - Production: `https://your-domain.com`
+#### GitHub OAuth (Optional)
 
-### 3. Authentication Providers
+1. Go to [GitHub Settings → Developer settings → OAuth Apps](https://github.com/settings/applications/new)
+2. Create new OAuth App:
+   - **Homepage URL**: `http://localhost:3000`
+   - **Authorization callback URL**: `http://localhost:3000/api/auth/callback/github`
+3. Copy credentials:
 
-#### GitHub OAuth
+```env
+GITHUB_ID="your-github-client-id"
+GITHUB_SECRET="your-github-client-secret"
+```
 
-1. Go to [GitHub Developer Settings](https://github.com/settings/applications/new).
-2. Register a new OAuth App.
-3. Set **Homepage URL** to `http://localhost:3000` (or your production URL).
-4. Set **Authorization callback URL** to `http://localhost:3000/api/auth/callback/github`.
-5. Copy standard **Client ID** and generate a **Client Secret**.
-6. Update `GITHUB_ID` and `GITHUB_SECRET` in `.env`.
+#### Google OAuth (Optional)
 
-#### Google OAuth
+1. Go to [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
+2. Create OAuth 2.0 Client ID:
+   - **Authorized JavaScript origins**: `http://localhost:3000`
+   - **Authorized redirect URIs**: `http://localhost:3000/api/auth/callback/google`
+3. Copy credentials:
 
-1. Go to the [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
-2. Create a new Project and configure the OAuth Consent Screen.
-3. Create Credentials > OAuth client ID > Web application.
-4. Add **Authorized JavaScript origins**: `http://localhost:3000`.
-5. Add **Authorized redirect URIs**: `http://localhost:3000/api/auth/callback/google`.
-6. Copy **Client ID** and **Client Secret**.
-7. Update `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in `.env`.
+```env
+GOOGLE_CLIENT_ID="your-google-client-id.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+```
 
-## Deploy on Vercel
+### 4. Database Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run Prisma migrations to set up your database schema:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx prisma migrate dev
+```
+
+Generate Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+### 5. Run Development Server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## 📦 Available Scripts
+
+| Script                   | Description                          |
+| ------------------------ | ------------------------------------ |
+| `npm run dev`            | Start development server             |
+| `npm run build`          | Build for production                 |
+| `npm start`              | Start production server              |
+| `npm run lint`           | Run ESLint                           |
+| `npx prisma studio`      | Open Prisma Studio (database GUI)    |
+| `npx prisma migrate dev` | Create and apply database migrations |
+| `npx prisma generate`    | Generate Prisma Client               |
+
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/kneeraazon404/personal-finance-tracker)
+
+1. Push your code to GitHub
+2. Import project to Vercel
+3. Configure environment variables in Vercel dashboard
+4. Deploy!
+
+### Environment Variables for Production
+
+Make sure to set these in your hosting platform:
+
+```env
+DATABASE_URL="your-production-database-url"
+NEXTAUTH_SECRET="your-production-secret"
+NEXTAUTH_URL="https://your-domain.com"
+GITHUB_ID="your-github-id"
+GITHUB_SECRET="your-github-secret"
+GOOGLE_CLIENT_ID="your-google-id"
+GOOGLE_CLIENT_SECRET="your-google-secret"
+```
+
+### Database Migration in Production
+
+After deployment, run migrations:
+
+```bash
+npx prisma migrate deploy
+```
+
+## 📁 Project Structure
+
+```
+personal-finance-tracker/
+├── prisma/
+│   └── schema.prisma          # Database schema
+├── public/                    # Static assets
+├── src/
+│   ├── app/                   # Next.js App Router
+│   │   ├── (auth)/           # Protected routes
+│   │   │   ├── dashboard/
+│   │   │   ├── accounts/
+│   │   │   ├── transactions/
+│   │   │   ├── budgets/
+│   │   │   ├── goals/
+│   │   │   ├── loans/
+│   │   │   ├── subscriptions/
+│   │   │   └── categories/
+│   │   ├── api/              # API routes
+│   │   ├── login/
+│   │   ├── signup/
+│   │   ├── about/
+│   │   ├── features/
+│   │   └── pricing/
+│   ├── components/           # React components
+│   │   ├── landing/         # Landing page components
+│   │   ├── layout/          # Layout components
+│   │   ├── features/        # Feature-specific components
+│   │   └── ui/              # shadcn/ui components
+│   └── lib/                 # Utility functions
+├── .env.example             # Environment template
+├── package.json
+└── tsconfig.json
+```
+
+## 🔒 Security Best Practices
+
+- ✅ All API routes are protected with NextAuth sessions
+- ✅ Environment variables for sensitive data
+- ✅ SQL injection protection via Prisma ORM
+- ✅ CSRF protection built-in with NextAuth
+- ✅ Secure session cookies with HttpOnly flag
+- ✅ Password-less authentication via OAuth
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👨‍💻 Author
+
+**Neeraj Budhathoki**
+
+- GitHub: [@kneeraazon404](https://github.com/kneeraazon404)
+
+## 🙏 Acknowledgments
+
+- [Next.js](https://nextjs.org/) - The React Framework
+- [Prisma](https://www.prisma.io/) - Next-generation ORM
+- [NextAuth.js](https://next-auth.js.org/) - Authentication for Next.js
+- [shadcn/ui](https://ui.shadcn.com/) - Beautiful UI components
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Radix UI](https://www.radix-ui.com/) - Unstyled, accessible components
+
+---
+
+<p align="center">Made with ❤️ by Neeraj Budhathoki</p>

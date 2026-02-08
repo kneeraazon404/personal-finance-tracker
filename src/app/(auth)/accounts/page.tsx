@@ -15,7 +15,7 @@ export default async function AccountsPage() {
     return (
         <div className="space-y-4 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Accounts</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Accounts</h2>
                 <AccountCreateDialog />
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -28,7 +28,7 @@ export default async function AccountsPage() {
                             <AccountActions account={account} />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">
+                            <div className="text-2xl font-semibold">
                                 {formatCurrency(account.currentBalance)}
                             </div>
                         </CardContent>

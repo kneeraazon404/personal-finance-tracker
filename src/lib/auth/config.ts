@@ -24,9 +24,8 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
-        console.log("JWT Callback - User logged in:", user.id);
         if (account) {
-          console.log("JWT Callback - Account provider:", account.provider);
+          // Account provider info available here if needed
         }
       }
       return token;

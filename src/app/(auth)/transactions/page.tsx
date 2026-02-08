@@ -33,7 +33,7 @@ export default async function TransactionsPage() {
     return (
         <div className="flex-1 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Transactions</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Transactions</h2>
                 <TransactionCreateDialog accounts={accountOptions} goals={goalOptions} />
             </div>
             <Card>

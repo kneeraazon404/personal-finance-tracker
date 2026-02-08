@@ -5,33 +5,33 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 
 export const metadata: Metadata = {
-  title: "Sign In | Budget Tracker",
-  description: "Sign in to your account",
+  title: "Sign Up | Budget Tracker",
+  description: "Create your account and start managing your finances",
 };
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <>
       <Navbar />
       <div className="min-h-screen relative overflow-hidden">
         {/* Decorative Background Bubbles */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-crimson/20 rounded-full opacity-60 blur-3xl" />
-          <div className="absolute top-40 right-20 w-96 h-96 bg-ruby/20 rounded-full opacity-60 blur-3xl" />
-          <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-primary/20 rounded-full opacity-60 blur-3xl" />
+          <div className="absolute top-20 right-10 w-72 h-72 bg-ruby/20 rounded-full opacity-60 blur-3xl" />
+          <div className="absolute top-40 left-20 w-96 h-96 bg-crimson/20 rounded-full opacity-60 blur-3xl" />
+          <div className="absolute bottom-20 right-1/3 w-80 h-80 bg-primary/20 rounded-full opacity-60 blur-3xl" />
         </div>
 
         <div className="container mx-auto px-6 min-h-screen flex items-center justify-center py-20">
           <div className="max-w-lg w-full">
-            {/* Login Card */}
+            {/* Signup Card */}
             <div className="p-10 rounded-2xl border border-border bg-card shadow-2xl">
               <div className="flex flex-col space-y-6">
                 <div className="flex flex-col space-y-2 text-center">
                   <h1 className="text-3xl font-semibold tracking-tight">
-                    Welcome Back
+                    Create an account
                   </h1>
                   <p className="text-sm text-muted-foreground">
-                    Sign in to your account to continue
+                    Start your journey to financial freedom
                   </p>
                 </div>
 
@@ -57,13 +57,13 @@ export default function LoginPage() {
 
                 <div className="text-center text-sm">
                   <span className="text-muted-foreground">
-                    Don&apos;t have an account?{" "}
+                    Already have an account?{" "}
                   </span>
                   <Link
-                    href="/signup"
+                    href="/login"
                     className="font-medium text-primary hover:underline"
                   >
-                    Create account
+                    Sign in
                   </Link>
                 </div>
               </div>

@@ -69,7 +69,7 @@ export function LoanCard({ loan, onEdit, onDelete }: LoanCardProps) {
             <CardContent>
                 <div className="space-y-4">
                     <div className="flex justify-between items-baseline">
-                        <span className="text-2xl font-bold">
+                        <span className="text-2xl font-semibold">
                             {formatCurrency(loan.remainingAmount)}
                         </span>
                         <span className="text-xs text-muted-foreground">

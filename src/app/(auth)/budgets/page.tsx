@@ -17,7 +17,7 @@ export default async function BudgetsPage() {
     return (
         <div className="flex-1 space-y-4 pt-6">
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold tracking-tight">Monthly Budgets</h2>
+                <h2 className="text-3xl font-semibold tracking-tight">Monthly Budgets</h2>
                 <BudgetCreateDialog categories={categories} />
             </div>
 

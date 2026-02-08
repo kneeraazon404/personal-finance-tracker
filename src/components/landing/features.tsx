@@ -81,7 +81,7 @@ export function Features() {
     <section id="features" className="py-24 px-6 relative bg-muted/20">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-5xl font-semibold mb-6">
             Everything you need to{" "}
             <span className="text-primary">grow wealth</span>
           </h2>
@@ -109,7 +109,7 @@ export function Features() {
               >
                 <feature.icon className="w-7 h-7" />
               </div>
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
                 {feature.title}
               </h3>
               <p className="text-muted-foreground leading-relaxed">
