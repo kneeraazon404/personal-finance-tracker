@@ -5,6 +5,20 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
 import { goalSchema, GoalInput } from "@/lib/validations";
+import type { GoalProgress } from "@/types/finance";
+import { Prisma } from "@prisma/client";
+
+type Decimalish = Prisma.Decimal | number | string;
+
+type GoalProgressRow = Omit<
+    GoalProgress,
+    "initialAmount" | "targetAmount" | "currentAmount" | "progressPercent"
+> & {
+    initialAmount: Decimalish;
+    targetAmount: Decimalish;
+    currentAmount: Decimalish;
+    progressPercent: Decimalish;
+};
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -33,11 +47,11 @@ export async function createGoal(data: GoalInput) {
     return { success: true, data: goal };
 }
 
-export async function getGoalsWithProgress() {
+export async function getGoalsWithProgress(): Promise<GoalProgress[]> {
     const userId = await getCurrentUserId();
 
     // Use view for computed progress
-    const goals = await prisma.$queryRaw<any[]>`
+    const goals: GoalProgressRow[] = await prisma.$queryRaw<GoalProgressRow[]>`
     SELECT * FROM goal_progress 
     WHERE "userId" = ${userId}
     ORDER BY completed ASC, date ASC

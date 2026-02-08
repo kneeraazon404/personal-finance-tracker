@@ -4,19 +4,27 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
-import { z } from "zod";
+import { loanSchema, LoanInput } from "@/lib/validations";
+import type { LoanSummary } from "@/types/finance";
+import { Prisma } from "@prisma/client";
 
-const loanSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    totalAmount: z.number().min(0, "Total amount must be positive"),
-    remainingAmount: z.number().min(0, "Remaining amount must be positive"),
-    interestRate: z.number().optional().nullable(),
-    dueDate: z.date().optional().nullable(),
-    type: z.enum(["PAYABLE", "RECEIVABLE"]),
-    status: z.enum(["ACTIVE", "PAID", "CLOSED"]),
-});
+type Decimalish = Prisma.Decimal | number | string;
 
-export type LoanInput = z.infer<typeof loanSchema>;
+type LoanRow = {
+    id: string;
+    name: string;
+    totalAmount: Decimalish;
+    remainingAmount: Decimalish;
+    interestRate: Decimalish | null;
+    dueDate: Date | null;
+    type: "PAYABLE" | "RECEIVABLE";
+    status: "ACTIVE" | "PAID" | "CLOSED";
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    [key: string]: unknown;
+};
+
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -24,15 +32,15 @@ async function getCurrentUserId() {
     return session.user.id;
 }
 
-export async function getLoans() {
+export async function getLoans(): Promise<LoanSummary[]> {
     const userId = await getCurrentUserId();
 
-    const loans = await prisma.loan.findMany({
+    const loans: LoanRow[] = await prisma.loan.findMany({
         where: { userId },
         orderBy: { createdAt: "desc" }
     });
 
-    return loans.map(loan => ({
+    return loans.map((loan: LoanRow) => ({
         ...loan,
         totalAmount: Number(loan.totalAmount),
         remainingAmount: Number(loan.remainingAmount),

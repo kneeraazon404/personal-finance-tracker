@@ -4,17 +4,25 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
-import { z } from "zod";
+import { subscriptionSchema, SubscriptionInput } from "@/lib/validations";
+import type { SubscriptionSummary } from "@/types/finance";
+import { Prisma } from "@prisma/client";
 
-const subscriptionSchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    cost: z.number().min(0, "Cost must be positive"),
-    date: z.date(),
-    status: z.enum(["ACTIVE", "INACTIVE"]),
-    billing: z.enum(["MONTHLY", "YEARLY"]),
-});
+type Decimalish = Prisma.Decimal | number | string;
 
-export type SubscriptionInput = z.infer<typeof subscriptionSchema>;
+type SubscriptionRow = {
+    id: string;
+    name: string;
+    cost: Decimalish;
+    date: Date;
+    status: "ACTIVE" | "INACTIVE";
+    billing: "MONTHLY" | "YEARLY";
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    [key: string]: unknown;
+};
+
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -22,15 +30,15 @@ async function getCurrentUserId() {
     return session.user.id;
 }
 
-export async function getSubscriptions() {
+export async function getSubscriptions(): Promise<SubscriptionSummary[]> {
     const userId = await getCurrentUserId();
-    const subscriptions = await prisma.subscription.findMany({
+    const subscriptions: SubscriptionRow[] = await prisma.subscription.findMany({
         where: { userId },
         orderBy: { date: "asc" },
     });
 
     // Serialize Decimals
-    return subscriptions.map(sub => ({
+    return subscriptions.map((sub: SubscriptionRow) => ({
         ...sub,
         cost: Number(sub.cost)
     }));

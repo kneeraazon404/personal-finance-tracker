@@ -1,8 +1,7 @@
 import { Metadata } from "next";
 import { getLoans } from "@/actions/loans";
-import { LoanCard } from "@/components/features/loans/loan-card";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { LoanCreateDialog } from "@/components/features/loans/loan-create-dialog";
+import { LoanCardActions } from "@/components/features/loans/loan-card-actions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatCurrency } from "@/utils/format";
 
@@ -26,9 +25,7 @@ export default async function LoansPage() {
         <div className="flex-1 space-y-4 pt-6">
             <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold tracking-tight">Loans & Debts</h2>
-                <Button>
-                    <Plus className="mr-2 h-4 w-4" /> Add Record
-                </Button>
+                <LoanCreateDialog />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
@@ -67,7 +64,7 @@ export default async function LoansPage() {
                         </div>
                     ) : (
                         loans.map((loan) => (
-                            <LoanCard key={loan.id} loan={loan} />
+                            <LoanCardActions key={loan.id} loan={loan} />
                         ))
                     )}
                 </div>

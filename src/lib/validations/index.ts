@@ -66,11 +66,38 @@ export const categorySchema = z.object({
     icon: z.string().max(50).optional(),
 });
 
+const optionalNumberSchema = z.preprocess(
+    (val) => (val === "" || val === null || typeof val === "undefined" ? null : val),
+    z.coerce.number().min(0).nullable()
+);
+
+const optionalDateSchema = z.preprocess(
+    (val) => (val === "" || val === null || typeof val === "undefined" ? null : val),
+    z.coerce.date().nullable()
+);
+
+export const budgetSchema = z.object({
+    amount: moneySchema,
+    categoryId: z.string().cuid(),
+});
+
+export const loanSchema = z.object({
+    name: z.string().min(1, "Name is required").max(100),
+    totalAmount: moneySchema,
+    remainingAmount: moneySchema,
+    interestRate: optionalNumberSchema.optional(),
+    dueDate: optionalDateSchema.optional(),
+    type: z.enum(["PAYABLE", "RECEIVABLE"]),
+    status: z.enum(["ACTIVE", "PAID", "CLOSED"]),
+});
+
 // Type exports
-export type AccountInput = z.infer<typeof accountSchema>;
-export type IncomeInput = z.infer<typeof incomeSchema>;
-export type ExpenseInput = z.infer<typeof expenseSchema>;
-export type TransactionInput = z.infer<typeof transactionSchema>;
-export type SubscriptionInput = z.infer<typeof subscriptionSchema>;
-export type GoalInput = z.infer<typeof goalSchema>;
-export type CategoryInput = z.infer<typeof categorySchema>;
+export type AccountInput = z.input<typeof accountSchema>;
+export type IncomeInput = z.input<typeof incomeSchema>;
+export type ExpenseInput = z.input<typeof expenseSchema>;
+export type TransactionInput = z.input<typeof transactionSchema>;
+export type SubscriptionInput = z.input<typeof subscriptionSchema>;
+export type GoalInput = z.input<typeof goalSchema>;
+export type CategoryInput = z.input<typeof categorySchema>;
+export type BudgetInput = z.input<typeof budgetSchema>;
+export type LoanInput = z.input<typeof loanSchema>;

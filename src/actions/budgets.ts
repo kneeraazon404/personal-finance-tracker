@@ -4,14 +4,9 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
-import { z } from "zod";
-
-const budgetSchema = z.object({
-    amount: z.number().min(0, "Amount must be positive"),
-    categoryId: z.string().min(1, "Category is required"),
-});
-
-export type BudgetInput = z.infer<typeof budgetSchema>;
+import { Prisma } from "@prisma/client";
+import { budgetSchema, BudgetInput } from "@/lib/validations";
+import type { BudgetWithProgress } from "@/types/finance";
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -19,11 +14,29 @@ async function getCurrentUserId() {
     return session.user.id;
 }
 
-export async function getBudgets() {
+type Decimalish = Prisma.Decimal | number | string;
+
+type BudgetWithCategory = {
+    id: string;
+    amount: Decimalish;
+    categoryId: string;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    category: {
+        id: string;
+        name: string;
+        color: string;
+        icon: string | null;
+    };
+    [key: string]: unknown;
+};
+
+export async function getBudgets(): Promise<BudgetWithProgress[]> {
     const userId = await getCurrentUserId();
 
     // Get all budgets with their categories
-    const budgets = await prisma.budget.findMany({
+    const budgets: BudgetWithCategory[] = await prisma.budget.findMany({
         where: { userId },
         include: {
             category: {
@@ -43,7 +56,7 @@ export async function getBudgets() {
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-    const budgetsWithProgress = await Promise.all(budgets.map(async (budget) => {
+    const budgetsWithProgress = await Promise.all(budgets.map(async (budget: BudgetWithCategory) => {
         // Aggregate expenses for this category in the current month
         const expenseAggregation = await prisma.expense.aggregate({
             where: {

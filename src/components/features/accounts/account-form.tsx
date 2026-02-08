@@ -30,11 +30,11 @@ interface AccountFormProps {
 export function AccountForm({ account, onSuccess }: AccountFormProps) {
     const [isPending, startTransition] = useTransition();
 
-    const form = useForm({
+    const form = useForm<AccountInput>({
         resolver: zodResolver(accountSchema),
         defaultValues: {
             name: account?.name || "",
-            initialAmount: account?.initialAmount || "0",
+            initialAmount: account?.initialAmount ? String(account.initialAmount) : "0",
         },
     });
 

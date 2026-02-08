@@ -4,15 +4,19 @@ import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
-import { z } from "zod";
+import { categorySchema, CategoryInput } from "@/lib/validations";
+import type { CategorySummary } from "@/types/finance";
 
-const categorySchema = z.object({
-    name: z.string().min(1, "Name is required"),
-    color: z.string().min(1, "Color is required"),
-    icon: z.string().optional(),
-});
-
-export type CategoryInput = z.infer<typeof categorySchema>;
+export type CategoryRow = {
+    id: string;
+    name: string;
+    color: string;
+    icon: string | null;
+    userId: string;
+    createdAt: Date;
+    updatedAt: Date;
+    [key: string]: unknown;
+};
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -20,12 +24,13 @@ async function getCurrentUserId() {
     return session.user.id;
 }
 
-export async function getCategories() {
+export async function getCategories(): Promise<CategorySummary[]> {
     const userId = await getCurrentUserId();
-    return prisma.category.findMany({
+    const categories: CategoryRow[] = await prisma.category.findMany({
         where: { userId },
         orderBy: { name: "asc" },
     });
+    return categories;
 }
 
 export async function createCategory(data: CategoryInput) {

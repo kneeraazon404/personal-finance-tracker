@@ -5,6 +5,26 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth/config";
 import { prisma } from "@/lib/db";
 import { transactionSchema, TransactionInput } from "@/lib/validations";
+import type { TransactionSummary } from "@/types/finance";
+import { Prisma } from "@prisma/client";
+
+type Decimalish = Prisma.Decimal | number | string;
+
+type TransactionRow = {
+    id: string;
+    name: string;
+    amount: Decimalish;
+    date: Date;
+    fromAccountId: string;
+    toAccountId: string;
+    goalId: string | null;
+    createdAt: Date;
+    updatedAt: Date;
+    fromAccount: { id: string; name: string };
+    toAccount: { id: string; name: string };
+    goal: { id: string; name: string } | null;
+    [key: string]: unknown;
+};
 
 async function getCurrentUserId() {
     const session = await getServerSession(authOptions);
@@ -65,10 +85,10 @@ export async function getTransactions(options?: {
     startDate?: Date;
     endDate?: Date;
     limit?: number;
-}) {
+}): Promise<TransactionSummary[]> {
     const userId = await getCurrentUserId();
 
-    const transactions = await prisma.transaction.findMany({
+    const transactions: TransactionRow[] = await prisma.transaction.findMany({
         where: {
             OR: [
                 { fromAccount: { userId } },
@@ -93,7 +113,7 @@ export async function getTransactions(options?: {
         take: options?.limit || 50,
     });
 
-    return transactions.map((transaction) => ({
+    return transactions.map((transaction: TransactionRow) => ({
         ...transaction,
         amount: Number(transaction.amount),
     }));
